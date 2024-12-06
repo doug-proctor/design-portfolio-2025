@@ -9,13 +9,7 @@ export default defineType({
   fields: [
     defineField({
       name: "name",
-      title: "Hostel name",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "phone",
-      title: "Phone number",
+      title: "Site name",
       type: "string",
       validation: (rule) => rule.required(),
     }),
@@ -26,37 +20,14 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "address",
-      title: "Address",
-      description: "The hostel’s street address",
+      name: "linkedIn",
+      title: "LinkedId Profile",
       type: "string",
       validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "instagram_url",
-      title: "Instagram URL",
-      type: "string",
-    }),
-    defineField({
-      name: "facebook_url",
-      title: "Facebook URL",
-      type: "string",
     }),
     defineField({
       name: "ga_tracking_id",
       title: "Google Analytics tracking ID",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "google_maps_api_key",
-      title: "Google Maps API key",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "channel_manager_id",
-      title: "Channel manager ID",
       type: "string",
       validation: (rule) => rule.required(),
     }),

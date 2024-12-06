@@ -1,54 +1,23 @@
-"use client"
-
 import React from "react"
-import Link from "next/link"
-import Logo from "@/app/components/Logo"
-import InvisibleBookingForm from "@/app/components/InvisibleBookingForm"
+import Image from "next/image"
+import me from "@/app/me.png"
 
-function Nav({ closeMenu }: { closeMenu: () => void }) {
-
-  const formRef = React.useRef<null | HTMLFormElement>(null)
-
-  const submitForm = () => formRef.current?.submit()
-
-  return (
-    <nav className="external-css-component_site-nav fixed top-64 bottom-0 left-0 right-0 bg-background z-50">
-      <ul className="text-24 md:text-32 font-bold text-center space-y-24 w-full pt-96">
-        <li>
-          <Link legacyBehavior href="/">
-            <a className="inline-block text-accent hover:text-accent-hover transform hover:scale-175" onClick={closeMenu}>Home</a>
-          </Link>
-        </li>
-        <li>
-          <Link legacyBehavior href="accommodation">
-            <a className="inline-block text-accent hover:text-accent-hover transform hover:scale-175" onClick={closeMenu}>Accommodation</a>
-          </Link>
-        </li>
-        <li>
-          <Link legacyBehavior href="info-and-amenities">
-            <a className="inline-block text-accent hover:text-accent-hover transform hover:scale-175" onClick={closeMenu}>Info and amenities</a>
-          </Link>
-        </li>
-        <li>
-          <a className="inline-block text-accent hover:text-accent-hover transform hover:scale-175" href="#" onClick={submitForm}>Book now</a>
-        </li>
-      </ul>
-      <InvisibleBookingForm ref={formRef} />
-    </nav>
-  )
+function Avatar() {
+  return <Image src={me} alt="profile photo of Doug Proctor" width={200} height={200} className="mx-auto" />
 }
 
-export default function Header() {
-  const [isOpen, setIsOpen] = React.useState<Boolean>(false)
-
+export default function Component({ title } : { title: string }) {
   return (
-    <header className="bg-background md:fixed top-0 left-0 right-0 z-50">
-      <section className="flex justify-between px-16 items-center min-h-64">
-        <Logo />
-        <button className="font-medium text-accent hover:text-accent-hover" onClick={() => setIsOpen(!isOpen)}>Menu</button>
-      </section>
-
-      {isOpen && <Nav closeMenu={() => setIsOpen(false)} />}
+    <header className="space-y-24 text-center">
+      <Avatar />
+      <div className="space-y-8">
+        <h1 className="font-bold text-28 md:text-32 lg:text-40">{title}</h1>
+        <h2 className="text-24 font-medium text-foreground-secondary">
+          <span className="text-[white] font-bold px-4" style={{
+            "background": "linear-gradient(45deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)"
+          }}>Lead Product Designer</span>
+        </h2>
+      </div>
     </header>
   )
 }

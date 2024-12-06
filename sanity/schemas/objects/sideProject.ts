@@ -1,29 +1,33 @@
-import { EyeClosedIcon } from "@sanity/icons"
-import { defineArrayMember, defineField, defineType } from "sanity"
+import { HelpCircleIcon } from "@sanity/icons"
+import { defineField, defineType } from "sanity"
 
 export default defineType({
-  name: "accommodation",
-  title: "Accommodation Page",
-  type: "document",
-  icon: EyeClosedIcon,
+  name: "sideProject",
+  title: "Side Project",
+  // icon: HelpCircleIcon,
+  type: "object",
   fields: [
     defineField({
       name: "title",
       title: "Title",
-      description: "This appears in the page heading, navigation, and accommodation module on the homepage",
+      type: "string",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "subtitle",
+      title: "Subtitle",
       type: "string",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "description",
       title: "Description",
-      description: "This appears in the accommodation module on the homepage",
       type: "string",
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "picture",
-      title: "Picture",
+      name: "icon",
+      title: "Icon",
       type: "image",
       fields: [
         {
@@ -47,14 +51,7 @@ export default defineType({
           imageDescriptionField: "alt",
         },
       },
-      validation: (rule) => rule.required(),
+      // validation: (rule) => rule.required(),
     }),
   ],
-  preview: {
-    prepare() {
-      return {
-        title: "Accommodation Page",
-      }
-    },
-  },
 })

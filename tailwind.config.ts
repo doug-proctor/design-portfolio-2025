@@ -5,28 +5,25 @@ export default {
   content: ["./app/**/*.{ts,tsx}", "./sanity/**/*.{ts,tsx}"],
   theme: {
     screens: {
-      sm: "480px",
+      sm: "530px",
       md: "768px",
       lg: "976px",
       xl: "1440px",
     },
     colors: {
       accent: {
-        DEFAULT: "#187049",
-        hover: "#0b4f31",
+        DEFAULT: "#95FF49",
+        hover: "#88ec40",
       },
-      award: {
-        DEFAULT: "#FFB800",
-      },
-      content: {
-        DEFAULT: "#333333",
-        secondary: "#6E6E6E",
-        inverted: "#FFFFFF",
+      foreground: {
+        DEFAULT: "#232323",
+        secondary: "#7A7A7A",
+        tertiary: "#D9D9D9",
       },
       background: {
         DEFAULT: "#FFFFFF",
-        secondary: "#F4F6FF",
-        inverted: "#333333",
+        secondary: "#eaeaea",
+        tertiary: "#dfdfdf",
       }
     },
     spacing: {
@@ -46,13 +43,15 @@ export default {
       128: "128px",
     },
     fontSize: {
-      14: "0.875rem",
       16: "1rem",
       18: "1.125rem",
+      20: "1.25rem",
+      22: "1.375rem",
       24: "1.5rem",
+      28: "1.75rem",
       32: "2rem",
-      56: "3.5rem",
-      64: "4rem",
+      40: "2.5rem",
+      48: "3rem",
     },
     lineHeight: {
       24: "1.5rem",
@@ -60,12 +59,9 @@ export default {
     },
     borderRadius: {
       4: "4px",
-      24: "24px",
-      32: "32px",
-      full: "100%",
     },
-    scale: {
-      "175": "1.75",
+    backgroundImage: {
+      rainbow: "linear-gradient(45deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)",
     },
     extend: {
       fontFamily: {

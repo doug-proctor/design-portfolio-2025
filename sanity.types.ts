@@ -68,44 +68,59 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Faq = {
-  _id: string;
-  _type: "faq";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  question?: string;
-  answer?: string;
-};
-
-export type Post = {
-  _id: string;
-  _type: "post";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
+export type Scene = {
+  _type: "scene";
+  pageWide?: boolean;
+  figures?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    caption?: string;
+    alt?: string;
+    _type: "figure";
     _key: string;
   }>;
-  excerpt?: string;
-  coverImage?: {
+};
+
+export type Figure = {
+  _type: "figure";
+  asset?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  };
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  caption?: string;
+  alt?: string;
+};
+
+export type ToolSet = {
+  _type: "toolSet";
+  title?: string;
+  subtitle?: string;
+  list?: Array<string>;
+};
+
+export type Strength = {
+  _type: "strength";
+  title?: string;
+  description?: string;
+  iconSvg?: string;
+};
+
+export type SideProject = {
+  _type: "sideProject";
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  icon?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -117,12 +132,50 @@ export type Post = {
     alt?: string;
     _type: "image";
   };
-  date?: string;
-  author?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "author";
+};
+
+export type PortableText = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+  listItem?: "bullet";
+  markDefs?: Array<{
+    href?: string;
+    _type: "link";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+} | {
+  _key: string;
+} & Scene>;
+
+export type Post = {
+  _id: string;
+  _type: "post";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  client?: string;
+  slug?: Slug;
+  content?: PortableText;
+  thumbnailImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
   };
 };
 
@@ -132,95 +185,6 @@ export type Slug = {
   source?: string;
 };
 
-export type Room = {
-  _id: string;
-  _type: "room";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  type?: string;
-  description?: string;
-  picture?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-};
-
-export type Author = {
-  _id: string;
-  _type: "author";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  picture?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-};
-
-export type Amenity = {
-  _id: string;
-  _type: "amenity";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  promoted?: boolean;
-  name?: string;
-  description?: string;
-  svg_icon?: string;
-  picture?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-};
-
-export type Testimonial = {
-  _id: string;
-  _type: "testimonial";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  comment?: string;
-  picture?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-};
-
 export type Home = {
   _id: string;
   _type: "home";
@@ -228,92 +192,16 @@ export type Home = {
   _updatedAt: string;
   _rev: string;
   title?: string;
-  picture?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-};
-
-export type About = {
-  _id: string;
-  _type: "about";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  description?: string;
-  picture?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-};
-
-export type Cookie = {
-  _id: string;
-  _type: "cookie";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
+  intro?: string;
+  strengths?: Array<{
     _key: string;
-  }>;
-};
-
-export type Privacy = {
-  _id: string;
-  _type: "privacy";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
+  } & Strength>;
+  toolkit?: Array<{
     _key: string;
-  }>;
+  } & ToolSet>;
+  sideProjects?: Array<{
+    _key: string;
+  } & SideProject>;
 };
 
 export type Settings = {
@@ -323,39 +211,12 @@ export type Settings = {
   _updatedAt: string;
   _rev: string;
   name?: string;
-  phone?: string;
   email?: string;
-  address?: string;
-  instagram_url?: string;
-  facebook_url?: string;
+  linkedIn?: string;
   ga_tracking_id?: string;
-  google_maps_api_key?: string;
-  channel_manager_id?: string;
   meta_description?: string;
   tab_title?: string;
   ogImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-};
-
-export type Accommodation = {
-  _id: string;
-  _type: "accommodation";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  description?: string;
-  picture?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -547,196 +408,28 @@ export type SanityAssistSchemaTypeField = {
   } & SanityAssistInstruction>;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Faq | Post | Slug | Room | Author | Amenity | Testimonial | Home | About | Cookie | Privacy | Settings | Accommodation | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Scene | Figure | ToolSet | Strength | SideProject | PortableText | Post | Slug | Home | Settings | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
-// Variable: layoutQuery
-// Query: *[_type in ["settings", "cookie", "privacy", "accommodation", "about"]]
-export type LayoutQueryResult = Array<{
+// Variable: homeQuery
+// Query: *[_type == "home"]
+export type HomeQueryResult = Array<{
   _id: string;
-  _type: "about";
+  _type: "home";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   title?: string;
-  description?: string;
-  picture?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-} | {
-  _id: string;
-  _type: "accommodation";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  description?: string;
-  picture?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-} | {
-  _id: string;
-  _type: "cookie";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
+  intro?: string;
+  strengths?: Array<{
     _key: string;
-  }>;
-} | {
-  _id: string;
-  _type: "privacy";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
+  } & Strength>;
+  toolkit?: Array<{
     _key: string;
-  }>;
-} | {
-  _id: string;
-  _type: "settings";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  phone?: string;
-  email?: string;
-  address?: string;
-  instagram_url?: string;
-  facebook_url?: string;
-  ga_tracking_id?: string;
-  google_maps_api_key?: string;
-  channel_manager_id?: string;
-  meta_description?: string;
-  tab_title?: string;
-  ogImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-}>;
-// Variable: accommodationQuery
-// Query: *[_type in ["accommodation"]][0]
-export type AccommodationQueryResult = {
-  _id: string;
-  _type: "accommodation";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  description?: string;
-  picture?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-} | null;
-// Variable: testimonialsQuery
-// Query: *[_type in ["testimonial"]]{_id, name, picture, comment}
-export type TestimonialsQueryResult = Array<{
-  _id: string;
-  name: string | null;
-  picture: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  } | null;
-  comment: string | null;
-}>;
-// Variable: amenitiesQuery
-// Query: *[_type in ["amenity"]][0..5]{_id, name, svg_icon}
-export type AmenitiesQueryResult = Array<{
-  _id: string;
-  name: string | null;
-  svg_icon: string | null;
-}>;
-// Variable: amenitiesFullQuery
-// Query: *[_type in ["amenity"] && promoted == true]{_id, name, description, picture}
-export type AmenitiesFullQueryResult = Array<{
-  _id: string;
-  name: string | null;
-  description: string | null;
-  picture: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  } | null;
+  } & ToolSet>;
+  sideProjects?: Array<{
+    _key: string;
+  } & SideProject>;
 }>;
 // Variable: settingsQuery
 // Query: *[_type in ["settings"]][0]
@@ -747,14 +440,9 @@ export type SettingsQueryResult = {
   _updatedAt: string;
   _rev: string;
   name?: string;
-  phone?: string;
   email?: string;
-  address?: string;
-  instagram_url?: string;
-  facebook_url?: string;
+  linkedIn?: string;
   ga_tracking_id?: string;
-  google_maps_api_key?: string;
-  channel_manager_id?: string;
   meta_description?: string;
   tab_title?: string;
   ogImage?: {
@@ -770,71 +458,43 @@ export type SettingsQueryResult = {
     _type: "image";
   };
 } | null;
-// Variable: privacyQuery
-// Query: *[_type in ["privacy"]][0]
-export type PrivacyQueryResult = {
-  _id: string;
-  _type: "privacy";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
+// Variable: projectsQuery
+// Query: *[_type == "sampleProject"]{_id, title}
+export type ProjectsQueryResult = Array<never>;
+// Variable: strengthsQuery
+// Query: *[_type == "home"]{strengths}
+export type StrengthsQueryResult = Array<{
+  strengths: Array<{
     _key: string;
-  }>;
-} | null;
-// Variable: cookieQuery
-// Query: *[_type in ["cookie"]][0]
-export type CookieQueryResult = {
-  _id: string;
-  _type: "cookie";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
+  } & Strength> | null;
+}>;
+// Variable: toolkitQuery
+// Query: *[_type == "home"]{toolkit}
+export type ToolkitQueryResult = Array<{
+  toolkit: Array<{
     _key: string;
-  }>;
-} | null;
-// Variable: aboutQuery
-// Query: *[_type in ["about"]][0]
-export type AboutQueryResult = {
+  } & ToolSet> | null;
+}>;
+// Variable: sideProjectsQuery
+// Query: *[_type == "home"]{sideProjects}
+export type SideProjectsQueryResult = Array<{
+  sideProjects: Array<{
+    _key: string;
+  } & SideProject> | null;
+}>;
+// Variable: caseStudiesQuery
+// Query: *[_type == "post" && slug.current != null]
+export type CaseStudiesQueryResult = Array<{
   _id: string;
-  _type: "about";
+  _type: "post";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   title?: string;
-  description?: string;
-  picture?: {
+  client?: string;
+  slug?: Slug;
+  content?: PortableText;
+  thumbnailImage?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -846,43 +506,20 @@ export type AboutQueryResult = {
     alt?: string;
     _type: "image";
   };
-} | null;
-// Variable: faqsQuery
-// Query: *[_type in ["faq"]]{_id, question, answer}
-export type FaqsQueryResult = Array<{
-  _id: string;
-  question: string | null;
-  answer: string | null;
 }>;
-// Variable: roomQuery
-// Query: *[_type in ["room"]]{_id, type, description, picture}
-export type RoomQueryResult = Array<{
+// Variable: caseStudyQuery
+// Query: *[_type == "post" && slug.current == $slug][0]
+export type CaseStudyQueryResult = {
   _id: string;
-  type: string | null;
-  description: string | null;
-  picture: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  } | null;
-}>;
-// Variable: homeQuery
-// Query: *[_type in ["home"]][0]
-export type HomeQueryResult = {
-  _id: string;
-  _type: "home";
+  _type: "post";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   title?: string;
-  picture?: {
+  client?: string;
+  slug?: Slug;
+  content?: PortableText;
+  thumbnailImage?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -900,17 +537,13 @@ export type HomeQueryResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type in [\"settings\", \"cookie\", \"privacy\", \"accommodation\", \"about\"]]": LayoutQueryResult;
-    "*[_type in [\"accommodation\"]][0]": AccommodationQueryResult;
-    "*[_type in [\"testimonial\"]]{_id, name, picture, comment}": TestimonialsQueryResult;
-    "*[_type in [\"amenity\"]][0..5]{_id, name, svg_icon}": AmenitiesQueryResult;
-    "*[_type in [\"amenity\"] && promoted == true]{_id, name, description, picture}": AmenitiesFullQueryResult;
+    "*[_type == \"home\"]": HomeQueryResult;
     "*[_type in [\"settings\"]][0]": SettingsQueryResult;
-    "*[_type in [\"privacy\"]][0]": PrivacyQueryResult;
-    "*[_type in [\"cookie\"]][0]": CookieQueryResult;
-    "*[_type in [\"about\"]][0]": AboutQueryResult;
-    "*[_type in [\"faq\"]]{_id, question, answer}": FaqsQueryResult;
-    "*[_type in [\"room\"]]{_id, type, description, picture}": RoomQueryResult;
-    "*[_type in [\"home\"]][0]": HomeQueryResult;
+    "*[_type == \"sampleProject\"]{_id, title}": ProjectsQueryResult;
+    "*[_type == \"home\"]{strengths}": StrengthsQueryResult;
+    "*[_type == \"home\"]{toolkit}": ToolkitQueryResult;
+    "*[_type == \"home\"]{sideProjects}": SideProjectsQueryResult;
+    "*[_type == \"post\" && slug.current != null]": CaseStudiesQueryResult;
+    "*[_type == \"post\" && slug.current == $slug][0]": CaseStudyQueryResult;
   }
 }

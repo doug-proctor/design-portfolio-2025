@@ -1,48 +1,56 @@
 import { sanityFetch } from "@/sanity/lib/fetch"
-import { accommodationQuery, aboutQuery, homeQuery } from "@/sanity/lib/queries"
+import { homeQuery } from "@/sanity/lib/queries"
 
-import Testimonials from "@/app/components/Testimonials"
-import PageHeader from "@/app/components/PageHeader"
-import Amenities from "@/app/components/Amenities"
-import MediaItem from "@/app/components/MediaItem"
-import Contact from "@/app/components/Contact"
-import Faqs from "@/app/components/Faqs"
+import HorizontalRule from "@/app/components/HorizontalRule"
+import SideProjects from "@/app/components/SideProjects"
+import CaseStudies from "@/app/components/CaseStudies"
+import Strengths from "@/app/components/Strengths"
+import JumpLink from "@/app/components/JumpLink"
+import Toolkit from "@/app/components/Toolkit"
+import Header from "@/app/components/Header"
+import Footer from "@/app/components/Footer"
+import Intro from "@/app/components/Intro"
 
 export default async function Page() {
-  const accommodation = await sanityFetch({ query: accommodationQuery })
-  const about = await sanityFetch({ query: aboutQuery })
-  const home = await sanityFetch({ query: homeQuery })
+  const result = await sanityFetch({ query: homeQuery })
+  const content = {
+    intro: result[0].intro,
+    title: result[0].title,
+  }
 
   return (
-    <>
-      <PageHeader
-        image={home?.picture}
-        title={home?.title}
-        showRoomCta={true}
-      />
+    <div className="py-128 space-y-48 sm:space-y-80 md:space-y-96 lg:space-y-112">
 
-      <MediaItem
-        title={accommodation?.title}
-        image={accommodation?.picture}
-        description={accommodation?.description}
-        button={{ href: "accommodation", text: "View rooms" }}
-      />
+      {/* Header group */}
+      <div className="space-y-32">
+        <div className="space-y-16">
+          <Header title={content.title!}/>
+          <Intro content={content.intro!}/>
+        </div>
+        <JumpLink targetId="#case-studies">Jump to case studies</JumpLink>
+      </div>
 
-      <MediaItem
-        title={about?.title}
-        image={about?.picture}
-        description={about?.description}
-        button={{ href: "info-and-amenities", text: "Info & amenities" }}
-        reverse={true}
-      />
+      <HorizontalRule />
 
-      <Amenities />
+      <Strengths/>
 
-      <Testimonials />
+      <HorizontalRule />
 
-      <Faqs />
+      <Toolkit/>
 
-      <Contact />
-    </>
+      <div id="case-studies">
+        <HorizontalRule />
+      </div>
+
+      <CaseStudies/>
+
+      <HorizontalRule />
+
+      <SideProjects/>
+
+      <HorizontalRule />
+
+      <Footer/>
+    </div>
   )
 }

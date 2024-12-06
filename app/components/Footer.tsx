@@ -1,14 +1,11 @@
-import Link from "next/link"
-import { type Settings } from "@/sanity.types"
+import React from "react"
+import H2 from "@/app/components/H2"
 
-export default function Footer({ settings } : { settings: Settings }) {
+export default function Component() {
   return (
-    <footer className="text-14 text-center text-content-inverted bg-accent px-16 py-32 sm:px-32 sm:flex sm:flex-row-reverse sm:justify-between">
-      <ul className="text-center mb-32 sm:mb-0 space-y-8 sm:flex sm:space-x-16 sm:space-y-0">
-        <li className="sm:block"><Link className="underline text-content-inverted" href="cookie-policy">Cookie policy</Link></li>
-        <li className="sm:block"><Link className="underline text-content-inverted" href="privacy-policy">Privacy policy</Link></li>
-      </ul>
-      &copy; {settings.name} {(new Date()).getFullYear()}
+    <footer className="text-center space-y-48">
+      <H2>Let’s make something!</H2>
+      <div>Message me on <strong><a href="https://google.com">LinkedIn</a></strong>, or drop me an email at <strong>hello@dougproctor.co.uk</strong></div>
     </footer>
   )
 }

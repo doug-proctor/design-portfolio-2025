@@ -1,18 +1,16 @@
-import { DocumentTextIcon } from "@sanity/icons";
-import { format, parseISO } from "date-fns";
-import { defineField, defineType } from "sanity";
-
-import authorType from "./author";
+import { DocumentTextIcon } from "@sanity/icons"
+import { format, parseISO } from "date-fns"
+import { defineField, defineType } from "sanity"
 
 /**
  * This file is the schema definition for a post.
  *
- * Here you'll be able to edit the different fields that appear when you 
+ * Here you'll be able to edit the different fields that appear when you
  * create or edit a post in the studio.
- * 
+ *
  * Here you can see the different schema types that are available:
 
-  https://www.sanity.io/docs/schema-types
+ https://www.sanity.io/docs/schema-types
 
  */
 
@@ -25,6 +23,12 @@ export default defineType({
     defineField({
       name: "title",
       title: "Title",
+      type: "string",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "client",
+      title: "Client",
       type: "string",
       validation: (rule) => rule.required(),
     }),
@@ -43,17 +47,13 @@ export default defineType({
     defineField({
       name: "content",
       title: "Content",
-      type: "array",
-      of: [{ type: "block" }],
+      type: "portableText",
+      // type: "array",
+      // of: [{ type: "block" }],
     }),
     defineField({
-      name: "excerpt",
-      title: "Excerpt",
-      type: "text",
-    }),
-    defineField({
-      name: "coverImage",
-      title: "Cover Image",
+      name: "thumbnailImage",
+      title: "Thumbnail Image",
       type: "image",
       options: {
         hotspot: true,
@@ -70,42 +70,34 @@ export default defineType({
           validation: (rule) => {
             return rule.custom((alt, context) => {
               if ((context.document?.coverImage as any)?.asset?._ref && !alt) {
-                return "Required";
+                return "Required"
               }
-              return true;
-            });
+              return true
+            })
           },
         },
       ],
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      name: "date",
-      title: "Date",
-      type: "datetime",
-      initialValue: () => new Date().toISOString(),
-    }),
-    defineField({
-      name: "author",
-      title: "Author",
-      type: "reference",
-      to: [{ type: authorType.name }],
-    }),
+    // defineField({
+    //   name: "date",
+    //   title: "Date",
+    //   type: "datetime",
+    //   initialValue: () => new Date().toISOString(),
+    // }),
   ],
   preview: {
     select: {
       title: "title",
-      author: "author.name",
       date: "date",
       media: "coverImage",
     },
-    prepare({ title, media, author, date }) {
+    prepare({ title, media, date }) {
       const subtitles = [
-        author && `by ${author}`,
         date && `on ${format(parseISO(date), "LLL d, yyyy")}`,
-      ].filter(Boolean);
+      ].filter(Boolean)
 
-      return { title, media, subtitle: subtitles.join(" ") };
+      return { title, media, subtitle: subtitles.join(" ") }
     },
   },
-});
+})

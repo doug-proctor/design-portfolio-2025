@@ -4,23 +4,13 @@ import { type Settings } from "@/sanity.types"
 import ReactGA from "react-ga4"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import type { Metadata } from "next"
-import {
-  // VisualEditing,
-  toPlainText,
-  // type PortableTextBlock,
-} from "next-sanity"
 import { Poppins } from "next/font/google"
-// import { draftMode } from "next/headers";
 import { Suspense } from "react"
 
-import Header from "@/app/components/Header"
-import Footer from "@/app/components/Footer"
 import DevTool from "@/app/components/DevTool"
 
-// import AlertBanner from "./alert-banner";
-
 import { sanityFetch } from "@/sanity/lib/fetch"
-import { layoutQuery, settingsQuery } from "@/sanity/lib/queries"
+import { settingsQuery } from "@/sanity/lib/queries"
 import { resolveOpenGraphImage } from "@/sanity/lib/utils"
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -70,23 +60,15 @@ const poppins = Poppins({
 })
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const data = await sanityFetch({ query: layoutQuery })
-
-  const settings = data.find(doc => doc._type === "settings") as Settings
-
-  ReactGA.initialize(settings.ga_tracking_id!)
+  // const data = await sanityFetch({ query: settingsQuery })
+  // ReactGA.initialize(settings.ga_tracking_id!)
 
   return (
-    <html lang="en" className={`${poppins.variable} text-18 text-content`}>
-      <body className="md:mt-64">
-        {/*{draftMode().isEnabled && <AlertBanner />}*/}
+    <html lang="en" className={`${poppins.variable} text-16 text-foreground`}>
+      <body className="px-24 max-w-[1100px] mx-auto">
         <Suspense>
-          <Header />
           <main>{children}</main>
-          <Footer settings={settings} />
         </Suspense>
-
-        {/*{draftMode().isEnabled && <VisualEditing />}*/}
         <SpeedInsights />
         {process.env.NODE_ENV === "development" && <DevTool />}
       </body>

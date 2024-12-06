@@ -2,62 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-a {
-    color: theme('colors.accent.DEFAULT');
+/*a {*/
+/*    color: theme('colors.accent.DEFAULT');*/
 
-    &:hover {
-        color: theme('colors.accent.hover');
-    }
-}
+/*    &:hover {*/
+/*        color: theme('colors.accent.hover');*/
+/*    }*/
+/*}*/
 
-.external-css-component_site-nav {
-    animation: fadeIn;
-    animation-duration: 0.2s;
-    animation-fill-mode: both;
-
-    & li {
-        animation: fadeIn;
-        animation-duration: 0.2s;
-        animation-fill-mode: both;
-
-        & a {
-            transition: all 0.1s ease-out;
-
-            &:hover {
-                transform: scale(1.06);
-            }
-        }
-    }
-
-    & li:nth-of-type(1) {
-        animation-delay: 50ms;
-    }
-    & li:nth-of-type(2) {
-        animation-delay: 100ms;
-    }
-    & li:nth-of-type(3) {
-        animation-delay: 150ms;
-    }
-    & li:nth-of-type(4) {
-        animation-delay: 200ms;
-    }
-    & li:nth-of-type(5) {
-        animation-delay: 250ms;
-    }
-    & li:nth-of-type(6) {
-        animation-delay: 300ms;
-    }
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-.external-css-component_logo {
-    -webkit-user-select: none !important;
+.external-css-component__with-inline-svg-child svg {
+    display: inline;
 }

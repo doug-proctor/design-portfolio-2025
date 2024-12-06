@@ -18,20 +18,19 @@ import { pageStructure, singletonPlugin } from "@/sanity/plugins/settings"
 import { assistWithPresets } from "@/sanity/plugins/assist"
 
 // Singleton schemas
-import accommodation from "@/sanity/schemas/singletons/accommodation"
 import settings from "@/sanity/schemas/singletons/settings"
-import privacy from "@/sanity/schemas/singletons/privacy"
-import cookie from "@/sanity/schemas/singletons/cookie"
-import about from "@/sanity/schemas/singletons/about"
 import home from "@/sanity/schemas/singletons/home"
 
 // Document schemas
-import testimonial from "@/sanity/schemas/documents/testimonial"
-import amenity from "@/sanity/schemas/documents/amenity"
-import author from "@/sanity/schemas/documents/author"
 import post from "@/sanity/schemas/documents/post"
-import room from "@/sanity/schemas/documents/room"
-import faq from "@/sanity/schemas/documents/faq"
+
+// Object schemas
+import portableText from "@/sanity/schemas/objects/portableText"
+import sideProject from "@/sanity/schemas/objects/sideProject"
+import strength from "@/sanity/schemas/objects/strength"
+import toolSet from "@/sanity/schemas/objects/toolSet"
+import figure from "@/sanity/schemas/objects/figure"
+import scene from "@/sanity/schemas/objects/scene"
 
 import { resolveHref } from "@/sanity/lib/utils"
 
@@ -45,25 +44,25 @@ const homeLocation = {
 //     || 'http://localhost:3000'
 // )
 
+
 export default defineConfig({
   basePath: studioUrl, projectId, dataset,
   schema: {
     types: [
       // Singletons
-      accommodation,
       settings,
-      privacy,
-      cookie,
-      about,
       home,
 
       // Documents
-      testimonial,
-      amenity,
-      author,
-      room,
       post,
-      faq,
+
+      // Objects
+      portableText,
+      sideProject,
+      strength,
+      toolSet,
+      figure,
+      scene,
     ],
   },
   plugins: [
@@ -104,15 +103,11 @@ export default defineConfig({
     structureTool({
       structure: pageStructure([
         settings,
-        accommodation,
         home,
-        about,
-        privacy,
-        cookie,
       ])
     }),
     // Configures the global "new document" button, and document actions, to suit the Settings document singleton
-    singletonPlugin([settings.name, cookie.name, privacy.name, accommodation.name, about.name, home.name]),
+    singletonPlugin([settings.name, home.name]),
     // Add an image asset source for Unsplash
     unsplashImageAsset(),
     // Sets up AI Assist with preset prompts

@@ -14,6 +14,8 @@ import {
   type PortableTextBlock,
 } from "next-sanity"
 
+import Scene from "@/app/components/Scene"
+
 export default function CustomPortableText({
   // className,
   value,
@@ -39,6 +41,9 @@ export default function CustomPortableText({
         )
       },
     },
+    types: {
+      scene: Scene,
+    }
   }
 
   return (
