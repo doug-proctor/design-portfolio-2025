@@ -881,7 +881,7 @@
     }
   },
   {
-    "name": "post",
+    "name": "caseStudy",
     "type": "document",
     "attributes": {
       "_id": {
@@ -894,7 +894,7 @@
         "type": "objectAttribute",
         "value": {
           "type": "string",
-          "value": "post"
+          "value": "caseStudy"
         }
       },
       "_createdAt": {
@@ -1011,6 +1011,13 @@
               }
             }
           }
+        },
+        "optional": true
+      },
+      "publishedDate": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
         },
         "optional": true
       }

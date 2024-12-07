@@ -155,9 +155,9 @@ export type PortableText = Array<{
   _key: string;
 } & Scene>;
 
-export type Post = {
+export type CaseStudy = {
   _id: string;
-  _type: "post";
+  _type: "caseStudy";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -177,6 +177,7 @@ export type Post = {
     alt?: string;
     _type: "image";
   };
+  publishedDate?: string;
 };
 
 export type Slug = {
@@ -408,7 +409,7 @@ export type SanityAssistSchemaTypeField = {
   } & SanityAssistInstruction>;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Scene | Figure | ToolSet | Strength | SideProject | PortableText | Post | Slug | Home | Settings | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Scene | Figure | ToolSet | Strength | SideProject | PortableText | CaseStudy | Slug | Home | Settings | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: homeQuery
@@ -483,10 +484,10 @@ export type SideProjectsQueryResult = Array<{
   } & SideProject> | null;
 }>;
 // Variable: caseStudiesQuery
-// Query: *[_type == "post" && slug.current != null]
+// Query: *[_type == "caseStudy" && slug.current != null && publishedDate <= $today]
 export type CaseStudiesQueryResult = Array<{
   _id: string;
-  _type: "post";
+  _type: "caseStudy";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -506,12 +507,13 @@ export type CaseStudiesQueryResult = Array<{
     alt?: string;
     _type: "image";
   };
+  publishedDate?: string;
 }>;
 // Variable: caseStudyQuery
-// Query: *[_type == "post" && slug.current == $slug][0]
+// Query: *[_type == "caseStudy" && slug.current == $slug][0]
 export type CaseStudyQueryResult = {
   _id: string;
-  _type: "post";
+  _type: "caseStudy";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -531,6 +533,7 @@ export type CaseStudyQueryResult = {
     alt?: string;
     _type: "image";
   };
+  publishedDate?: string;
 } | null;
 
 // Query TypeMap
@@ -543,7 +546,7 @@ declare module "@sanity/client" {
     "*[_type == \"home\"]{strengths}": StrengthsQueryResult;
     "*[_type == \"home\"]{toolkit}": ToolkitQueryResult;
     "*[_type == \"home\"]{sideProjects}": SideProjectsQueryResult;
-    "*[_type == \"post\" && slug.current != null]": CaseStudiesQueryResult;
-    "*[_type == \"post\" && slug.current == $slug][0]": CaseStudyQueryResult;
+    "*[_type == \"caseStudy\" && slug.current != null && publishedDate <= $today]": CaseStudiesQueryResult;
+    "*[_type == \"caseStudy\" && slug.current == $slug][0]": CaseStudyQueryResult;
   }
 }

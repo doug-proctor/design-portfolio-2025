@@ -10,6 +10,18 @@
 /*    }*/
 /*}*/
 
+.prose {
+    max-width: none;
+}
+
+.prose {
+    p, h2, h3, h4, ul, ol, .dp-scene:not(.dp-scene-full-width), blockquote {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 655px;
+    }
+}
+
 .external-css-component__with-inline-svg-child svg {
     display: inline;
 }

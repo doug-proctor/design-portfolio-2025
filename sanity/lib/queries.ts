@@ -6,5 +6,5 @@ export const projectsQuery = defineQuery(`*[_type == "sampleProject"]{_id, title
 export const strengthsQuery = defineQuery(`*[_type == "home"]{strengths}`)
 export const toolkitQuery = defineQuery(`*[_type == "home"]{toolkit}`)
 export const sideProjectsQuery = defineQuery(`*[_type == "home"]{sideProjects}`)
-export const caseStudiesQuery = defineQuery(`*[_type == "post" && slug.current != null]`)
-export const caseStudyQuery = defineQuery(`*[_type == "post" && slug.current == $slug][0]`)
+export const caseStudiesQuery = defineQuery(`*[_type == "caseStudy" && slug.current != null && publishedDate <= $today]`)
+export const caseStudyQuery = defineQuery(`*[_type == "caseStudy" && slug.current == $slug][0]`)

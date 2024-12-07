@@ -14,11 +14,12 @@ import Intro from "@/app/components/Intro"
 export default async function Page() {
   const result = await sanityFetch({ query: homeQuery })
   const content = {
-    intro: result[0].intro,
     title: result[0].title,
+    intro: result[0].intro,
   }
 
   return (
+    // The space classnames on the next line should match those on (site)/layout.tsx
     <div className="py-128 space-y-48 sm:space-y-80 md:space-y-96 lg:space-y-112">
 
       {/* Header group */}
@@ -47,10 +48,6 @@ export default async function Page() {
       <HorizontalRule />
 
       <SideProjects/>
-
-      <HorizontalRule />
-
-      <Footer/>
     </div>
   )
 }

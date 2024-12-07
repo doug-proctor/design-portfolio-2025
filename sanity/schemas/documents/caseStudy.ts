@@ -15,8 +15,8 @@ import { defineField, defineType } from "sanity"
  */
 
 export default defineType({
-  name: "post",
-  title: "Post",
+  name: "caseStudy",
+  title: "Case Study",
   icon: DocumentTextIcon,
   type: "document",
   fields: [
@@ -42,7 +42,7 @@ export default defineType({
         maxLength: 96,
         isUnique: (value, context) => context.defaultIsUnique(value, context),
       },
-      validation: (rule) => rule.required(),
+      // validation: (rule) => rule.required(),
     }),
     defineField({
       name: "content",
@@ -79,12 +79,12 @@ export default defineType({
       ],
       validation: (rule) => rule.required(),
     }),
-    // defineField({
-    //   name: "date",
-    //   title: "Date",
-    //   type: "datetime",
-    //   initialValue: () => new Date().toISOString(),
-    // }),
+    defineField({
+      name: "publishedDate",
+      title: "Published Date",
+      type: "datetime",
+      // initialValue: () => new Date().toISOString(),
+    }),
   ],
   preview: {
     select: {

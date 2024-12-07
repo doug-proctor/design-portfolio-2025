@@ -12,6 +12,8 @@ import DevTool from "@/app/components/DevTool"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { settingsQuery } from "@/sanity/lib/queries"
 import { resolveOpenGraphImage } from "@/sanity/lib/utils"
+import HorizontalRule from "@/app/components/HorizontalRule"
+import Footer from "@/app/components/Footer"
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await sanityFetch({
@@ -68,8 +70,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="px-24 max-w-[1100px] mx-auto">
         <Suspense>
           <main>{children}</main>
+          {/* The space classnames on the next line should match those on (site)/page.tsx */}
+          <div className="pb-128 space-y-48 sm:space-y-80 md:space-y-96 lg:space-y-112">
+            <HorizontalRule/>
+            <Footer/>
+          </div>
         </Suspense>
-        <SpeedInsights />
+        <SpeedInsights/>
         {process.env.NODE_ENV === "development" && <DevTool />}
       </body>
     </html>

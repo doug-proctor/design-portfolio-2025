@@ -22,7 +22,7 @@ import settings from "@/sanity/schemas/singletons/settings"
 import home from "@/sanity/schemas/singletons/home"
 
 // Document schemas
-import post from "@/sanity/schemas/documents/post"
+import caseStudy from "@/sanity/schemas/documents/caseStudy"
 
 // Object schemas
 import portableText from "@/sanity/schemas/objects/portableText"
@@ -54,7 +54,7 @@ export default defineConfig({
       home,
 
       // Documents
-      post,
+      caseStudy,
 
       // Objects
       portableText,

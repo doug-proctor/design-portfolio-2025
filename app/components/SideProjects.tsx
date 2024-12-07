@@ -18,9 +18,10 @@ export default async function Component() {
           <Card
             hasBorder
             hasCenteredHeader
+            hasSmallerThumbnail
             key={sideProject.title}
-            icon={sideProject.icon}
             title={sideProject.title}
+            thumbnail={sideProject.icon}
             body={sideProject.description}
             subtitle={sideProject.subtitle}
           />

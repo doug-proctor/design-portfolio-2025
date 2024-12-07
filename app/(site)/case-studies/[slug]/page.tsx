@@ -1,16 +1,16 @@
-import Image from "next/image"
+import Link from "next/link"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { caseStudiesQuery, caseStudyQuery } from "@/sanity/lib/queries"
-import { Post as PostType } from "@/sanity.types"
+import { CaseStudy as CaseStudyType } from "@/sanity.types"
 import { PortableTextBlock } from "next-sanity"
+import HorizontalRule from "@/app/components/HorizontalRule"
 import PortableText from "@/app/components/PortableText"
-import { urlForImage } from "@/sanity/lib/utils"
-import Header from "@/app/components/Header"
-import Footer from "@/app/components/Footer"
+import Avatar from "@/app/components/Avatar"
+import H1 from "@/app/components/H1"
 
 export async function generateStaticParams() {
-  const result = await sanityFetch({ query: caseStudiesQuery })
-  const caseStudies = result as PostType[]
+  const result = await sanityFetch({ query: caseStudiesQuery, params: { today: (new Date()).toISOString() } })
+  const caseStudies = result as CaseStudyType[]
 
   return caseStudies.map((post) => ({
     slug: post.slug?.current,
@@ -19,21 +19,28 @@ export async function generateStaticParams() {
 
 export default async function Page({ params } : { params: any }) {
   const { slug } = await params
-  const result = await sanityFetch({ query: caseStudyQuery, params: { slug } })
-  const caseStudy = result as PostType
-
-  // console.log(caseStudy)
-
-  const src = urlForImage(caseStudy.thumbnailImage)?.height(1000).width(2000).url() as string
+  const caseStudy = await sanityFetch({ query: caseStudyQuery, params: { slug } }) as CaseStudyType
 
   return (
     <>
-      <Header />
-      <Image src={src} alt="REPLACE ME" width={400} height={200} className="" />
-      <h1>{caseStudy.title}</h1>
-      <div>{caseStudy.client}</div>
-      <PortableText className="" value={caseStudy.content as PortableTextBlock[]} />
-      <Footer />
+      <div className="text-center space-y-8 py-32">
+        <Avatar small />
+        <Link className="block" href="/#case-studies">« Back to case studies</Link>
+      </div>
+
+      <HorizontalRule />
+
+      <article className="py-32 sm:py-48 md:py-64 space-y-32">
+        <H1>{caseStudy.title}</H1>
+
+        {/*<div className="space-y-8">*/}
+        {/*  <div>Client: {caseStudy.client}</div>*/}
+        {/*  <div>Client: {caseStudy.client}</div>*/}
+        {/*  <div>Client: {caseStudy.client}</div>*/}
+        {/*</div>*/}
+
+        <PortableText className="" value={caseStudy.content as PortableTextBlock[]} />
+      </article>
     </>
   )
 }

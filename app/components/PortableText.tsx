@@ -16,21 +16,17 @@ import {
 
 import Scene from "@/app/components/Scene"
 
-export default function CustomPortableText({
-  // className,
-  value,
-}: {
+type Props = {
   className?: string;
   value: PortableTextBlock[];
-}) {
+}
+
+export default function CustomPortableText({ className, value }: Props) {
   const components: PortableTextComponents = {
     block: {
-      h5: ({ children }) => (
-        <h5 className="mb-2 text-sm font-semibold">{children}</h5>
-      ),
-      h6: ({ children }) => (
-        <h6 className="mb-1 text-xs font-semibold">{children}</h6>
-      ),
+      // h2: ({ children }) => (
+      //   <h2 className="mb-2 text-sm font-semibold">{children}</h2>
+      // ),
     },
     marks: {
       link: ({ children, value }) => {
@@ -47,8 +43,8 @@ export default function CustomPortableText({
   }
 
   return (
-    // <div className={["prose", className].filter(Boolean).join(" ")}>
-    <PortableText components={components} value={value} />
-    // </div>
+    <div className={["prose", className].filter(Boolean).join(" ")}>
+      <PortableText components={components} value={value} />
+    </div>
   )
 }

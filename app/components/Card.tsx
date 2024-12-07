@@ -4,6 +4,7 @@ import Image from "next/image"
 import { urlForImage } from "@/sanity/lib/utils"
 
 type Props = {
+  hasSmallerThumbnail?: boolean,
   hasCenteredHeader?: boolean,
   hasBorder?: boolean,
   subtitle?: string,
@@ -13,27 +14,29 @@ type Props = {
   body?: any,
   icon?: any,
 }
-export default function component({ hasBorder, hasCenteredHeader, subtitle, title, thumbnail, icon, body, href } : Props) {
+export default function component({ hasBorder, hasCenteredHeader, hasSmallerThumbnail, subtitle, title, thumbnail, icon, body, href } : Props) {
 
   const Header = () => (
     <div className={`${hasCenteredHeader && "text-center"}`}>
       {icon && <span dangerouslySetInnerHTML={{ __html: icon }} className="external-css-component__with-inline-svg-child" />}
       <h3 className="text-20 font-bold">{title}</h3>
       <h4 className="text-16 font-medium text-foreground-secondary">{subtitle}</h4>
+      {href && <div className="text-accent">Dive in →</div>}
     </div>
   )
 
   const Content = () => (
     <div className="space-y-12">
       <div className="space-y-4">
-        {thumbnail && <Image
-          src={urlForImage(thumbnail)?.height(200).width(350).url() as string}
-          alt="alt"
-          width={350}
-          height={200}
-        />}
+        <div className={`${hasSmallerThumbnail && "w-[120px] mx-auto"}`}>
+          {thumbnail && <Image
+            src={urlForImage(thumbnail)?.width(700).url() as string}
+            alt={thumbnail.alt}
+            height={200}
+            width={350}
+          />}
+        </div>
         <Header />
-        {href && <div className="text-accent">Dive in →</div>}
       </div>
       <div>{body}</div>
     </div>

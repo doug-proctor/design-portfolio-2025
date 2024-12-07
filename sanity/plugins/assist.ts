@@ -2,9 +2,9 @@
  * Sets up the AI Assist plugin with preset prompts for content creation
  */
 
-import { assist } from "@sanity/assist";
+import { assist } from "@sanity/assist"
 
-import postType from "../schemas/documents/post";
+import postType from "../schemas/documents/caseStudy"
 
 export const assistWithPresets = () =>
   assist({
@@ -262,4 +262,4 @@ export const assistWithPresets = () =>
         ],
       },
     },
-  });
+  })
