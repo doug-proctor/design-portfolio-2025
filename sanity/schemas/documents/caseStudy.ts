@@ -33,6 +33,12 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "keyValues",
+      title: "Key / Values",
+      type: "array",
+      of: [{type: "keyValue"}]
+    }),
+    defineField({
       name: "slug",
       title: "Slug",
       type: "slug",

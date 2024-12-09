@@ -108,6 +108,12 @@ export type ToolSet = {
   list?: Array<string>;
 };
 
+export type KeyValue = {
+  _type: "keyValue";
+  key?: string;
+  value?: string;
+};
+
 export type Strength = {
   _type: "strength";
   title?: string;
@@ -163,6 +169,9 @@ export type CaseStudy = {
   _rev: string;
   title?: string;
   client?: string;
+  keyValues?: Array<{
+    _key: string;
+  } & KeyValue>;
   slug?: Slug;
   content?: PortableText;
   thumbnailImage?: {
@@ -409,7 +418,7 @@ export type SanityAssistSchemaTypeField = {
   } & SanityAssistInstruction>;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Scene | Figure | ToolSet | Strength | SideProject | PortableText | CaseStudy | Slug | Home | Settings | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Scene | Figure | ToolSet | KeyValue | Strength | SideProject | PortableText | CaseStudy | Slug | Home | Settings | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: homeQuery
@@ -493,6 +502,9 @@ export type CaseStudiesQueryResult = Array<{
   _rev: string;
   title?: string;
   client?: string;
+  keyValues?: Array<{
+    _key: string;
+  } & KeyValue>;
   slug?: Slug;
   content?: PortableText;
   thumbnailImage?: {
@@ -519,6 +531,9 @@ export type CaseStudyQueryResult = {
   _rev: string;
   title?: string;
   client?: string;
+  keyValues?: Array<{
+    _key: string;
+  } & KeyValue>;
   slug?: Slug;
   content?: PortableText;
   thumbnailImage?: {

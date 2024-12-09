@@ -56,7 +56,7 @@ export default {
   ],
   preview: {
     select: {
-      figures: "figures"
+      figures: "figures",
     },
     component: Scene
   }

@@ -15,7 +15,11 @@ export default async function Component() {
 
   return (
     <div className="space-y-24 sm:space-y-32 md:space-y-48">
-      <H2>Case studies</H2>
+
+      <div className="space-y-16">
+        <H2>Case studies</H2>
+        <p className="text-center text-[red] max-w-[500px] mx-auto">These case studies are at least 3 years old. More recent case studies are coming soon.</p>
+      </div>
       <Grid threeCols>
         {caseStudies.map(caseStudy => (
           <Card

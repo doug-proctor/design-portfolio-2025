@@ -8,7 +8,7 @@ export default function component({ value } : { value: any }) {
   }
 
   return (
-    <div className={`dp-scene ${value?.pageWide && "dp-scene-full-width"}`}>
+    <div className={`dp-scene flex gap-16 ${value?.pageWide && "dp-scene-full-width"}`}>
       {value?.figures.map((figure: FigureType) => {
         return (
           <Figure value={figure} key={figure.asset?._ref} />

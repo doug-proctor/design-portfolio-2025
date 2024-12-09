@@ -28,11 +28,12 @@ import caseStudy from "@/sanity/schemas/documents/caseStudy"
 import portableText from "@/sanity/schemas/objects/portableText"
 import sideProject from "@/sanity/schemas/objects/sideProject"
 import strength from "@/sanity/schemas/objects/strength"
+import keyValue from "@/sanity/schemas/objects/keyValue"
 import toolSet from "@/sanity/schemas/objects/toolSet"
 import figure from "@/sanity/schemas/objects/figure"
 import scene from "@/sanity/schemas/objects/scene"
 
-import { resolveHref } from "@/sanity/lib/utils"
+// import { resolveHref } from "@/sanity/lib/utils"
 
 const homeLocation = {
   title: "Home",
@@ -60,6 +61,7 @@ export default defineConfig({
       portableText,
       sideProject,
       strength,
+      keyValue,
       toolSet,
       figure,
       scene,

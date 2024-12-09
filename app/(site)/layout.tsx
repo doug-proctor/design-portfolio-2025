@@ -52,31 +52,28 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const poppins = Poppins({
   variable: "--font-poppins",
-  weight: [
-    "400", // normal
-    "500", // medium
-    "800"  // bold
-  ],
+  weight: ["400", "500", "800"],
   subsets: ["latin"],
   display: "swap",
 })
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // const data = await sanityFetch({ query: settingsQuery })
+  const data = await sanityFetch({ query: settingsQuery })
+
   // ReactGA.initialize(settings.ga_tracking_id!)
 
   return (
     <html lang="en" className={`${poppins.variable} text-16 text-foreground`}>
-      <body className="px-24 max-w-[1100px] mx-auto">
+      <body>
         <Suspense>
           <main>{children}</main>
           {/* The space classnames on the next line should match those on (site)/page.tsx */}
           <div className="pb-128 space-y-48 sm:space-y-80 md:space-y-96 lg:space-y-112">
-            <HorizontalRule/>
-            <Footer/>
+            <HorizontalRule />
+            <Footer email={data?.email!} linkedIn={data?.linkedIn!} />
           </div>
         </Suspense>
-        <SpeedInsights/>
+        <SpeedInsights />
         {process.env.NODE_ENV === "development" && <DevTool />}
       </body>
     </html>
