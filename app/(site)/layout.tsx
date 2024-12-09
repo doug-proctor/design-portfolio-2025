@@ -1,7 +1,7 @@
 import "../globals.css"
 
 import { type Settings } from "@/sanity.types"
-import ReactGA from "react-ga4"
+// import ReactGA from "react-ga4"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import type { Metadata } from "next"
 import { Poppins } from "next/font/google"
@@ -13,6 +13,7 @@ import { sanityFetch } from "@/sanity/lib/fetch"
 import { settingsQuery } from "@/sanity/lib/queries"
 import { resolveOpenGraphImage } from "@/sanity/lib/utils"
 import HorizontalRule from "@/app/components/HorizontalRule"
+import Container from "@/app/components/Container"
 import Footer from "@/app/components/Footer"
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -70,7 +71,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           {/* The space classnames on the next line should match those on (site)/page.tsx */}
           <div className="pb-128 space-y-48 sm:space-y-80 md:space-y-96 lg:space-y-112">
             <HorizontalRule />
-            <Footer email={data?.email!} linkedIn={data?.linkedIn!} />
+            <Container>
+              <Footer email={data?.email!} linkedIn={data?.linkedIn!} />
+            </Container>
           </div>
         </Suspense>
         <SpeedInsights />

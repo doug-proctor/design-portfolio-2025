@@ -21,10 +21,10 @@ export async function generateStaticParams() {
 
 function KeyValues({ keyValues } : { keyValues: KeyValue[] }) {
   return (
-    <Card hasBorder body={
-      <dl className="grid gap-16 grid-cols-1 md:grid-cols-3">
+    <Card  body={
+      <dl className="space-y-16 sm:space-y-0 sm:flex sm:gap-32 sm:justify-center md:gap-64">
         {keyValues?.map(kv => (
-          <div key={kv.key} className="zmb-12">
+          <div key={kv.key} className="">
             <dt className="font-bold">{kv.key}</dt>
             <dd>{kv.value}</dd>
           </div>
@@ -45,7 +45,7 @@ export default async function Page({ params } : { params: any }) {
         <Link className="block" href="/#case-studies">« Back to case studies</Link>
       </div>
       <Container>
-        <article className="py-32 sm:py-48 md:py-64 space-y-32">
+        <article className="py-32 sm:py-48 md:py-64 space-y-32 sm:space-y-40 md:space-y-64">
           <H1>{caseStudy.title}</H1>
           {caseStudy.keyValues && <KeyValues keyValues={caseStudy.keyValues}/>}
           <PortableText className="" value={caseStudy.content as PortableTextBlock[]} />

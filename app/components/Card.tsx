@@ -6,6 +6,7 @@ import { urlForImage } from "@/sanity/lib/utils"
 type Props = {
   hasSmallerThumbnail?: boolean,
   hasCenteredHeader?: boolean,
+  isCaseStudy?: boolean,
   hasBorder?: boolean,
   subtitle?: string,
   thumbnail?: any,
@@ -14,7 +15,7 @@ type Props = {
   body?: any,
   icon?: any,
 }
-export default function component({ hasBorder, hasCenteredHeader, hasSmallerThumbnail, subtitle, title, thumbnail, icon, body, href } : Props) {
+export default function component({ hasBorder, hasCenteredHeader, isCaseStudy, hasSmallerThumbnail, subtitle, title, thumbnail, icon, body, href } : Props) {
 
   const Header = () => (
     <div className={`${hasCenteredHeader && "text-center"}`}>
@@ -48,9 +49,15 @@ export default function component({ hasBorder, hasCenteredHeader, hasSmallerThum
     </div>
   ) : <Content />
 
+  const CaseStudyContent = () => isCaseStudy ? (
+    <div className="py-32 px-16 border border-foreground-tertiary rounded-4">
+      <Content />
+    </div>
+  ) : <Content />
+
   const WithHref = () => href ? (
     <Link href={href} className="hover:scale-105 transition">
-      <BorderedContent />
+      <CaseStudyContent />
     </Link>
   ) : (
     <BorderedContent />

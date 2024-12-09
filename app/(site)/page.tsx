@@ -1,5 +1,6 @@
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { homeQuery } from "@/sanity/lib/queries"
+// import { FileText } from "lucide-react"
 import HorizontalRule from "@/app/components/HorizontalRule"
 import SideProjects from "@/app/components/SideProjects"
 import CaseStudies from "@/app/components/CaseStudies"
@@ -22,9 +23,14 @@ export default async function Page() {
           <Intro content={intro!}/>
         </div>
         <JumpLink targetId="#case-studies">Jump to case studies</JumpLink>
+
+        {/*<div className="text-center flex justify-center">*/}
+        {/*  <FileText />*/}
+        {/*  Download CV*/}
+        {/*</div>*/}
       </div>
       <Container>
-        <div className="px-24 pb-128 space-y-48 sm:space-y-80 md:space-y-96 lg:space-y-112">
+        <div className="pb-128 space-y-48 sm:space-y-80 md:space-y-96 lg:space-y-112">
           <Strengths/>
           <HorizontalRule />
           <Toolkit/>
